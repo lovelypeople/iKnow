@@ -25,7 +25,12 @@ function planA() {
     total += salary * 12;
 
     save *= INVESTMENT_YOY;
-    save += salary * 12 * SAVE_PERCENT;
+
+    if (i <= 15) { // 前15年储蓄增长
+      save += salary * 12 * SAVE_PERCENT;
+    } else { // 之后开始消耗储蓄，每年消耗的为其工资时候的顶峰时的开支（考虑到从俭入奢易，从奢入俭难）
+      save -= 30000 * 12 * (1 - SAVE_PERCENT);
+    }
   }
 
   console.log(`方案a: 一辈子赚了 ${Math.floor(total / 10000)} 万，储蓄为 ${Math.floor(save / 10000)} 万`);
